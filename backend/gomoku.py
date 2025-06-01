@@ -71,65 +71,9 @@ def checkWins(board, r, c):
             count += 1
             nr -= dr
             nc -= dc
-        if count == 5:
+        if count >= 5:
             return True
     return False
-
-"""
-def checkWins(board):
-    for i in range(15):
-        for j in range(15):
-            if board[i][j] > 0:
-                if(isValid(i + 4, j)): 
-                    if(checkSouth(board, i, j)):
-                        return True 
-                if(isValid(i - 4, j)):
-                    if(checkNorth(board, i, j)):
-                        return True
-                if(isValid(i + 4, j + 4)):
-                    if(checkSouthEast(board, i, j)):
-                        return True
-                if(isValid(i - 4, j - 4)):
-                    if(checkNorthWest (board, i, j)):
-                        return True
-                if(isValid(i, j - 4)):
-                    if(checkWest (board, i, j)):
-                        return True
-                if(isValid(i, j + 4)):
-                    if(checkEast(board, i, j)):
-                        return True
-                if(isValid(i - 4, j + 4)):
-                    if(checkNorthEast(board, i, j)):
-                        return True
-                if(isValid(i + 4, j - 4)):
-                    if(checkSouthWest(board, i , j)):
-                        return True
-    return False
-
-def checkNorth(board, r, c):
-    return(board[r][c] == board[r-1][c] == board[r-2][c] == board[r-3][c] == board[r-4][c])   
-        
-def checkNorthEast(board, r, c):
-    return(board[r][c] == board[r-1][c+1] == board[r-2][c+2] == board[r-3][c+3] == board[r-4][c+4])
-    
-def checkNorthWest(board, r, c):
-    return(board[r][c] == board[r-1][c-1] == board[r-2][c-2] == board[r-3][c-3] == board[r-4][c-4])
-
-def checkSouthEast(board, r, c):
-    return(board[r][c] == board[r+1][c+1] == board[r+2][c+2] == board[r+3][c+3] == board[r+4][c+4]) 
-
-def checkSouthWest(board, r, c):
-    return(board[r][c] == board[r+1][c-1] == board[r+2][c-2] == board[r+3][c-3] == board[r+4][c-4])
-
-def checkWest(board, r, c): 
-    return(board[r][c] == board[r][c-1] == board[r][c-2] == board[r][c-3] == board[r][c-4])
-
-def checkSouth(board ,r, c):
-    return(board[r][c] == board[r+1][c] == board[r+2][c] == board[r+3][c] == board[r+4][c])
-
-def checkEast(board, r, c):
-    return(board[r][c] == board[r][c+1] == board[r][c+2] == board[r][c+3] == board[r][c+4])    
-"""
 
 if __name__ == "__main__":
     main()
