@@ -1,0 +1,598 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: "Meow";
+  src: local("Meow"),
+  url("./assets/fonts/meow.otf") format("opentype");
+  font-weight: 400;      
+  font-style: normal;    
+  font-display: swap;  
+}
+*
+{
+
+    box-sizing: border-box;
+  }
+
+  :root{
+    --background : url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+    --background-color: #a6572a; 
+    --square-texture : url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+    --square-background-color: #e5ab60; 
+    --board-border: 6px solid #3b261a; 
+    --board-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+    --board-wrapper-color : #673717;
+    --board-wrapper-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+    --restart-button-bg-color: #482e1f;
+    --restart-button-color: white;
+    --pfp-Pop-Up-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+    --win-Pop-Up-color:     linear-gradient(90deg, rgb(102, 82, 0) 0%, rgb(212, 184, 24) 50%, rgb(50, 34, 2) 96%);
+    --win-Pop-Up-Border: 3px solid black;
+    --win-Pop-Up-Border: 3px solid #3b261a;
+
+
+
+
+  }
+  .nightmode{
+    --background: url("./assets/starry\ night\ .jpg");
+    --background-color: transparent;  
+    --square-texture: url("./assets/moon1.jpg");
+    --square-background-color: transparent;
+    --board-border: 6px solid rgb(13, 3, 40); 
+    --board-wrapper-color: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(13, 38, 84, 1) 50%, rgba(31, 197, 197, 1) 96%);
+    --win-Pop-Up-color: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(13, 38, 84, 1) 50%, rgba(31, 197, 197, 1) 96%);
+    --win-Pop-Up-Border: 3px solid black;
+    --board-wrapper-image: url("./assets/starry\ night\ .jpg");
+    --board-image: url("./assets/starry\ night\ .jpg");
+    --restart-button-color: black;
+    --restart-button-bg-color: white;
+    --pfp-Pop-Up-image: url("./assets/starry\ night\ .jpg");
+        background-repeat: cover;      
+        background-size: 100% 100%;      
+  }
+  
+  body {
+  
+    font-family: 'Montserrat', serif;
+    font-weight: 600;
+    margin: 20px;
+    padding: 0;
+    background-color: var(--background-color);
+    background-image: var(--background);
+    color: #d2ebff;
+    text-align: center;
+    overflow: visible;
+  }
+  
+  h1 {
+    margin-top: 0;
+    font-size: 22px;
+  }
+  
+  h2 {
+    margin-top: 0;
+    font-size: 20px;
+  }
+  
+  h3 {
+    margin-top: 0;
+    font-size: 18px;
+  }
+  
+  h4 {
+    margin-top: 0;
+    font-size: 16px;
+  }
+  
+  h5 {
+    margin-top: 0;
+    font-size: 14px;
+  }
+  
+  h6 {
+    margin-top: 0;
+    font-size: 12px;
+  }
+  
+  code {
+    font-size: 1.2em;
+  }
+  
+  ul {
+    padding-inline-start: 20px;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  
+  .board-row:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+  .row{
+    overflow: visible;
+    display:flex; 
+  }
+  
+  .status {
+    margin-bottom: 10px;
+  }
+  .game {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .game-info {
+    margin-left: 20px;
+  }
+  .board {
+      z-index: 3;
+      overflow: visible;
+      display: grid;
+      grid-template-columns: repeat(15, 40px);
+      grid-template-rows: repeat(15, 40px);
+      gap: 0;
+      background-image: var(--board-image);
+      background-color: tan;
+    }
+  
+  .board-container{
+    z-index: 2;
+    overflow: visible;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    max-width: 100%;
+  }
+  .scoreboard{
+    display: flex;
+    justify-content: center;
+    justify-self: center; 
+    gap: 20px; 
+    background-color: #d2ebff;
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    margin-top: 60px;
+    width: 300px;
+
+  }
+  .score {
+    position: relative;
+    top: 13px;
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 1;       
+  }
+  .xWins {
+    color: #00B4D8;
+  }
+  
+  .oWins {
+    color: #03045E;
+  }
+  .seperator{
+    position: relative;
+    top: 12px;
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 1;
+    color: black;
+  }
+  .restart-button{
+    font-size: 10px;
+    font-weight: bold;
+    padding: 16px;
+    background-color: var(--restart-button-bg-color);
+    color: var(--restart-button-color);
+    margin-top: 20px;
+    margin-left:2px;
+    border-radius: 7px;
+    border-color: white;
+  }
+  .reset-button{
+    font-size: 10px;
+    font-weight: bold;
+    padding: 16px;
+    margin-top: 20px;
+    margin-left: 10px;
+    background-color: #d2ebff;
+    border-radius: 7px;
+    border: 1px solid #999;
+  }
+  .status{
+    justify-self: center  ;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 8px;
+    margin-top: 5px;
+    width: 170px;
+    font-style: italic;
+  }
+
+  .black {
+    background-color: black;
+  }
+  
+  .white {
+    background-color: white;
+    border: 1px solid black;
+  }
+
+/*
+
+*/
+.score {
+  color: black;
+  font-size: 24px;
+  margin: 0 10px;
+}
+
+.logo {
+  flex-wrap: wrap;
+  background-color: transparent;
+  pointer-events: none;
+  margin-bottom: -10%;
+  margin-right: 50px;
+  width: 300px;
+  height: auto;
+  z-index: 10;
+}  
+
+  .square {
+
+    background-image: var(--square-texture);
+    background-color: var(--square-background-color);
+    position: relative; 
+    overflow: visible;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  .stone {
+    position: absolute;
+    overflow: visible;
+    top: 102%;
+    left: 102%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;;
+    box-shadow: inset -2px -2px 4px rgba(255,255,255,0.3),
+                inset 2px 2px 6px rgba(0,0,0,0.5),
+                0 0 2px rgba(0,0,0,0.8);
+  }
+.stone.black {
+    background: radial-gradient(
+      circle at 30% 30%,
+      #111,    
+      #000    
+    );
+   /* box-shadow:
+      inset -2px -2px 4px rgba(255,255,255,0.3),
+      inset 2px 2px 6px rgba(0,0,0,0.8),
+      0 0 2px rgba(0,0,0,0.8);
+      */
+  }
+  
+
+  .stone.white {
+    background: radial-gradient(
+      circle at 30% 30%,
+      #ffffff 0%,
+      #f3f3f3 70%,
+      #dddddd 100%
+    );
+    border: 1px solid #999; 
+    /*box-shadow:
+      inset -1px -1px 3px rgba(255, 255, 255, 0.6),
+      inset 1px 1px 4px rgba(0, 0, 0, 0.2),
+      0 0 2px rgba(0, 0, 0, 0.4);*/
+    
+  }
+  .preview {
+    position: absolute;
+    top: 77%;
+    left: 80%;
+    pointer-events: none;
+    z-index: 9;
+  }
+
+  .dot {
+    left: 35px; 
+    top: 35px; 
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: black;
+    border-radius: 50%;
+    z-index: 8;
+    pointer-events: none;
+  }
+
+    .board-wrapper {
+      background-image: var(--board-wrapper-image);
+      z-index: 1;
+      overflow: visible;
+      margin-top: 5%;
+      display: inline-block;
+      padding: 8px; /* thin inner padding */
+      background-color: var(--board-wrapper-color);
+      border: var(--board-border);
+      border-radius: 8px;
+    }
+    .catFace{
+      position: absolute;
+      left: 3.5px; 
+      top: 3.5px;
+    }
+    .lower {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: -4%;
+      margin-top: -2%;
+      flex-wrap: nowrap;        /* prevent wrapping into a column */
+      align-items: center;      /* vertical‐center them if needed */
+      justify-content: space-between; /* or whatever spacing you like */
+    }
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-height: 90vh
+    }
+    .leftside{
+      display: flex;
+      margin-top: 10%;
+      direction: column;
+      justify-content: center;
+      gap: 200px; 
+    }
+    .winPopUpWindow {
+      position: fixed;
+      backdrop-filter: blur(3px);
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6); /* semi‐transparent black */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999; /* sits above everything else */
+    }
+    .winPopUp {
+      display: flex;
+      gap: 30px; 
+      flex-direction: row;
+      justify-content: space-evenly;
+      background: var(--win-Pop-Up-color);
+
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      border: var(--win-Pop-Up-Border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      color: white;      /* default text color inside the box */
+      max-width: 90%;
+      width: 500px;      /* you can adjust this */
+      z-index: 1000;     /* one level above the overlay */
+    }
+    
+    /* 2) Style for the little paw icon button at top */
+    .winPopUp > button:first‐child {
+      border: none;
+      margin-bottom: 1rem;
+
+    }
+    .header{
+      width: 100%;
+      display: flex;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      direction: row;
+      background: transparent;
+      justify-content: center;
+
+      margin-top: -3%;
+      
+    }
+
+    .nightmode-switch{
+      color: white;
+      position: fixed; 
+      right: 50px; 
+      top: 15px; 
+    }
+    /* 3) The “Player X wins!” heading */
+    .winPopUp h1 {
+      font-family: "Meow", serif;
+      font-size: 1.75rem;
+      margin: 0.5rem 0 1rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    }
+    
+    /* 4) Wrapper around the cat icon (just for spacing) */
+    .winLogo {
+      display: flex;
+      gap: 0px; 
+      flex-direction: column;
+      align-items: center;
+    }
+    .winCat{
+      margin-bottom: 20px;
+    }
+    .Crown{
+      margin-top: 0%;
+      margin-bottom: 0px;
+      margin-left: 67%;
+      color: gold;
+    }
+    /* 5) “Play Again” button */
+    .playAgain {
+      transform: rotate(270deg);
+      transform-origin: center center;
+      font-family: "Meow", serif;
+      background-color: transparent; /* dark wood tone */
+      border-radius: 6px;
+      padding: 0.5rem 1.25rem;
+      font-size: 1rem;
+      
+      transition: background-color 0.2s ease;
+    }
+    
+    .playAgain:hover {
+      background-color: rgb(201, 201, 201); 
+    }
+    .playerWins {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .blackCat{
+      margin-top: 12%;
+    }
+    .winnerBlack{
+      color: black;
+    }
+    .winnerWhite{
+      color: white; 
+    }
+    .belowBoard{
+      margin-right: 70px;;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 200px;
+      flex-direction: row;
+    }
+    .soundSwitch{
+      margin-top: 20px; 
+      margin-left: -35px;;
+    }
+    .orangeCat{
+      margin-bottom: 18%;
+      margin-left: 7%;
+      width: 350px; 
+      height: 650px;
+    }
+    .rightside{
+      justify-self: flex-end;
+      align-self: center;
+    }
+    .middle{
+      justify-self:center;
+      margin-left: 5%;
+      margin-top: 7%; 
+    }
+    .widgetProfilePicture{
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* crop/scale to exactly fill the square */
+      display: block;   
+
+    }
+    .profileWidget{
+      margin-right: -5%;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+
+    }
+    .widgetUserName{
+      justify-self: flex-end;
+      margin-top: 24px;
+      font-size: smaller;
+      font-family: "Abril Fatface", serif;
+      color: white;
+      font-weight: bold;
+    }
+    .widgetProfilePictureWrapper{
+      margin-top: 21px;
+      border-radius: 3px;
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      border: 1px solid white;
+      background: transparent;
+      cursor: pointer;
+      overflow: hidden; 
+    }
+
+    .pfp{
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* crop/scale to exactly fill the square */
+      display: block;    /* remove any inline‐gap issues */
+    }
+    .profilePictureWrapper{
+      width: 75px;
+      border-radius: 4px;
+      height: 75px;
+      padding: 0;
+      border: 1px solid white;
+      background: transparent;
+      cursor: pointer;
+      overflow: hidden; 
+    }
+
+    .pfpPopUpRow{
+      display: flex;
+      gap: 20px;
+      flex-direction: row;
+      
+    }
+    .pfpPopUp{
+        position: fixed; 
+        left: 36%;
+        top: 33%;
+
+        display: flex;
+        gap: 30px; 
+        flex-direction: column;
+        justify-content: space-evenly;
+        background-color: #a6572a;
+        background-image: var(--pfp-Pop-Up-image);
+        padding: 2rem 2.5rem;
+        border-radius: 10px;
+        text-align: center;
+        color: white;      /* default text color inside the box */
+        max-width: 90%;
+        width: 350px;      /* you can adjust this */
+        z-index: 1000;     /* one level above the overlay */
+      
+    }
+    .username-display{
+      background-color: transparent;
+      border: none;
+    }
+    .edit-username-input{
+      background-color: transparent;
+      border: none;
+      outline: none;
+      resize: none;
+      position: ab;
+    }
+    .gomeowkuLogo{
+      background: none;
+      background-color: transparent;
+    }
+    .whiteLogo{
+      filter: brightness(0) 
+      /* 2) Make that black output into white */
+      invert(1);
+    }
